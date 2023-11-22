@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { Nunito } from 'next/font/google'
 import { ReactElement, ReactNode } from 'react';
+import { SessionProvider } from 'next-auth/react'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -21,12 +22,12 @@ export default function App({ Component,
 }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
   return (
-
-    <div
-      className={`${nunito.className}`}
-    >
-      {getLayout(<Component {...pageProps} />)}
-    </div>
-
+      <SessionProvider session={session}>
+        <div
+          className={`${nunito.className}`}
+        >
+          {getLayout(<Component {...pageProps} />)}
+        </div>
+      </SessionProvider>
   );
 }
