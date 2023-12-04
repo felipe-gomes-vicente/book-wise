@@ -5,7 +5,7 @@ import { Container, Content } from "./styles"
 
 type DefaultLayoutProps = {
   children: ReactNode
-  title: string
+  title: string;
 }
 
 export const DefaultLayout = ({ title, children }: DefaultLayoutProps) => {
